@@ -1,0 +1,6 @@
+/out/
+/web/WEB-INF/classes/*
+*.iml
+/.idea/workspace.xml
+
+

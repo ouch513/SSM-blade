@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="main.ouch.core.dao.TokenDao">
+
+    <insert id="addToken" parameterType="Token">
+        insert into token(user_id,created_at,token)
+        values(#{userId},#{createdAt},#{token})
+    </insert>
+
+    <select id="queryToken"  resultType="Token">
+        SELECT
+            user_id,
+            created_at,
+            token
+        FROM
+            token
+        WHERE
+            user_id = #{userId}
+            AND
+            token = #{token}
+    </select>
+
+    <delete id="deleteToken">
+        DELETE FROM token
+        WHERE
+            user_id = #{userId}
+            AND
+            token = #{token}
+    </delete>
+
+</mapper>
