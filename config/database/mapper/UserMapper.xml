@@ -6,7 +6,7 @@
 
 <mapper namespace="main.ouch.core.dao.UserDao">
 
-    <select id="queryAll" resultType="User">
+    <select id="queryAll" parameterType="User" resultType="User">
         SELECT
             user_id,
             username,
@@ -18,21 +18,7 @@
             user
     </select>
 
-    <select id="queryByUsername" resultType="User">
-        SELECT
-            user_id,
-            username,
-            email,
-            role,
-            admin_role,
-            reg_time
-        FROM
-            user
-        WHERE
-            username = #{username}
-    </select>
-
-    <select id="queryByEmail" resultType="User">
+    <select id="queryByUsername" parameterType="java.lang.String" resultType="User">
         SELECT
             user_id,
             username,
@@ -43,10 +29,24 @@
         FROM
             user
         WHERE
-            email = #{email}
+            username = #{0}
     </select>
 
-    <select id="queryByLoginInfo"  resultType="User">
+    <select id="queryByEmail" parameterType="java.lang.String" resultType="User">
+        SELECT
+            user_id,
+            username,
+            email,
+            role,
+            admin_role,
+            reg_time
+        FROM
+            user
+        WHERE
+            email = #{0}
+    </select>
+
+    <select id="queryByLoginInfo" parameterType="java.lang.String" resultType="User">
         SELECT
             user_id,
             username,

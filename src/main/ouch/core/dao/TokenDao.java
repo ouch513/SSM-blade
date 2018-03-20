@@ -12,7 +12,7 @@ public interface TokenDao {
     /**
      * 查询 Token
      */
-    Token queryToken(String userId, String token);
+    Token queryToken(Token token);
 
     /**
      * 删除 Token

@@ -4,6 +4,7 @@ import main.ouch.common.format.JsonResponse;
 import main.ouch.common.tool.ValueUtil;
 import main.ouch.constant.Message;
 import main.ouch.core.domain.User;
+import main.ouch.core.service.TokenService;
 import main.ouch.core.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,9 @@ public class UserApiController {
     private UserService userService;
 
     @Autowired
+    private TokenService tokenService;
+
+    @Autowired
     private HttpSession session;
 
     @Autowired
@@ -35,14 +39,12 @@ public class UserApiController {
 
     @RequestMapping(value = "/list",produces = "text/plain;charset=utf-8")
     @ResponseBody
-    private String list() {
-        List<User> list = userService.getList();
+    private String list(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
+        req.setCharacterEncoding("utf-8");//设置参数的编码格式
+        String userId = req.getParameter("userId");
+        String token = req.getParameter("token");
 
-        if (list.size()>0) {
-            return JsonResponse.success(list);
-        } else {
-            return JsonResponse.error(Message.NO_DATA);
-        }
+        return userService.getList(userId,token);
     }
 
     @RequestMapping(value = "/queryByUsername",produces = "text/plain;charset=utf-8")
@@ -143,16 +145,19 @@ public class UserApiController {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        User user = userService.queryByLoginInfo(username,password);
+        user = userService.queryByLoginInfo(username,password);
 
         if(user == null){
             return JsonResponse.error(Message.ERROR_LOGIN);
         }
 
+        String token = tokenService.addToken(user.getUserId());
+
         session.setAttribute("username",username);
         session.setAttribute("userId",user.getUserId());
+        session.setAttribute("token",token);
 
-        return JsonResponse.successSession(user);
+        return JsonResponse.loginSession(user,token);
     }
 
 }

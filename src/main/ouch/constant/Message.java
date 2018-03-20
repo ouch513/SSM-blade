@@ -17,4 +17,6 @@ public class Message {
 
     public static final String ERROR_LOGIN = "用户名或密码错误";
 
+    public static final String LOGIN_TIME_OUT = "登录超时";
+
 }

@@ -11,7 +11,7 @@
         values(#{userId},#{createdAt},#{token})
     </insert>
 
-    <select id="queryToken"  resultType="Token">
+    <select id="queryToken" parameterType="Token" resultType="Token">
         SELECT
             user_id,
             created_at,
@@ -24,12 +24,12 @@
             token = #{token}
     </select>
 
-    <delete id="deleteToken">
+    <delete id="deleteToken" parameterType="java.lang.String">
         DELETE FROM token
         WHERE
-            user_id = #{userId}
+            user_id = #{0}
             AND
-            token = #{token}
+            token = #{1}
     </delete>
 
 </mapper>

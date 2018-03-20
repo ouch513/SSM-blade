@@ -56,6 +56,7 @@ public class DashboardController {
     private ModelAndView logout() {
         session.removeAttribute("username");
         session.removeAttribute("userId");
+        session.removeAttribute("token");
 
         ModelAndView mv = new ModelAndView("redirect:/dashboard/login");
         return mv;

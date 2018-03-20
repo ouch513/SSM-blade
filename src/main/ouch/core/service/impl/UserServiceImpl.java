@@ -1,5 +1,6 @@
 package main.ouch.core.service.impl;
 
+import main.ouch.common.format.JsonResponse;
 import main.ouch.common.tool.ValueUtil;
 import main.ouch.constant.Role;
 import main.ouch.core.dao.UserDao;
@@ -23,9 +24,9 @@ public class UserServiceImpl implements UserService{
     private UserDao userDao;
 
     @Override
-    public List<User> getList() {
+    public String getList(String userId,String token) {
         List<User> userList =  userDao.queryAll();
-        return Role.getRoleList(userList);
+        return JsonResponse.userList(userList);
     }
 
     @Override

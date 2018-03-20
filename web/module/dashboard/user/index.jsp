@@ -55,5 +55,5 @@
     <script src="${staticResourcePath}/js/dataTables/jquery.dataTables.js"></script>
     <script src="${staticResourcePath}/js/dataTables/dataTables.bootstrap.js"></script>
 
-    <script src="${webPath}/module/dashboard/user/index.js"></script>
+    <%@ include file="index-js.jsp" %>
 </div>

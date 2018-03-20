@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component("token")
 public class Token {
     private String userId;
-    private String date;
+    private String createdAt;
     private String Token;
 
     public String getUserId() {
@@ -16,12 +16,12 @@ public class Token {
         this.userId = userId;
     }
 
-    public String getDate() {
-        return date;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getToken() {

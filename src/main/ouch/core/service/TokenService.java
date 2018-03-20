@@ -7,7 +7,7 @@ public interface TokenService {
     /**
      * 创建 Token
      */
-    Token addToken(String userId);
+    String addToken(String userId);
 
     /**
      * 检验 Token

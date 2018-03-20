@@ -1,12 +1,16 @@
 package main.ouch.core.service.impl;
 
+import main.ouch.common.tool.TokenTool;
+import main.ouch.common.tool.ValueUtil;
 import main.ouch.core.dao.TokenDao;
 import main.ouch.core.domain.Token;
 import main.ouch.core.service.TokenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TokenServiceImpl implements TokenService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -18,17 +22,25 @@ public class TokenServiceImpl implements TokenService {
     private Token token;
 
     @Override
-    public Token addToken(String userId) {
+    public String addToken(String userId) {
         token.setUserId(userId);
+        token.setCreatedAt(TokenTool.nowDate());
+        token.setToken(TokenTool.createToken(userId));
         tokenDao.addToken(token);
 
-        return token;
+        return token.getToken();
     }
 
     @Override
-    public Boolean checkToken(String userId, String token) {
-        Token tokenInfo = tokenDao.queryToken(userId,token);
-        return false;
+    public Boolean checkToken(String userId, String tokenStr) {
+        token.setToken(tokenStr);
+        token.setUserId(userId);
+        Token tokenInfo = tokenDao.queryToken(token);
+        if(tokenInfo==null){
+            return false;
+        }else{
+            return TokenTool.checkTime(tokenInfo.getCreatedAt());
+        }
     }
 
     @Override

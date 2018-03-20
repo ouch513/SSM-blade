@@ -9,7 +9,7 @@ public interface UserService {
     /**
      * 查询所有用户
      */
-    List<User> getList();
+    String getList(String userId,String token);
 
     /**
      * 用户名查询
