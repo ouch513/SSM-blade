@@ -10,12 +10,12 @@
 <div id="page-wrapper">
     <div class="header">
         <h1 class="page-header">
-            用户管理
-            <small>User Management</small>
+            站内公告
+            <small>Bulletin Management</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="${webPath}/dashboard/user/index">用户管理</a></li>
-            <li class="active">用户列表</li>
+            <li><a href="${webPath}/dashboard/bulletin/index">站内公告</a></li>
+            <li class="active">公告列表</li>
         </ol>
     </div>
 
@@ -26,7 +26,7 @@
                 <!-- Advanced Tables -->
                 <div class="card">
                     <div class="card-action text-right">
-                        <a class="waves-effect waves-light btn btn-warning" id="create-user" href="${webPath}/dashboard/user/create">创建用户 <i class="glyphicon glyphicon-plus-sign"></i></a>
+                        <a class="waves-effect waves-light btn btn-warning" id="create-bulletin" href="${webPath}/dashboard/bulletin/create">发布公告 <i class="glyphicon glyphicon-plus-sign"></i></a>
                         <a class="waves-effect waves-light btn" id="refresh-data">刷新数据 <i class="glyphicon glyphicon-refresh"></i></a>
                     </div>
                     <div class="card-content">
@@ -34,11 +34,8 @@
                             <table class="table table-striped table-bordered table-hover" id="dataTables">
                                 <thead>
                                 <tr>
-                                    <th>用户</th>
-                                    <th>邮箱</th>
-                                    <th>账户类型</th>
-                                    <th>权限类型</th>
-                                    <th>注册时间</th>
+                                    <th>标题</th>
+                                    <th>更新时间</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>

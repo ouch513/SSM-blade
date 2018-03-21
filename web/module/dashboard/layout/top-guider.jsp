@@ -35,8 +35,8 @@
 <ul id="dropdown1" class="dropdown-content">
     <li class="<%=(curUser.equals("")?"":"hide")%>"><a href="${webPath}/dashboard/login"><i class="fa fa-sign-in fa-fw"></i> 登录</a></li>
     <li class="<%=(curUser.equals("")?"":"hide")%>"><a href="${webPath}/dashboard/regin"><i class="fa fa-edit fa-fw"></i> 注册</a></li>
-    <li class="<%=(curUser.equals("")?"hide":"")%>"><a href="#"><i class="fa fa-user fa-fw"></i> 个人中心</a></li>
-    <li class="<%=(curUser.equals("")?"hide":"")%>"><a href="#"><i class="fa fa-gear fa-fw"></i> 账户设置</a></li>
+    <li class="<%=(curUser.equals("")?"hide":"")%>"><a href="${webPath}/dashboard/profile/<%=request.getSession().getAttribute("userId")%>"><i class="fa fa-user fa-fw"></i> 个人中心</a></li>
+    <li class="<%=(curUser.equals("")?"hide":"")%>"><a href="${webPath}/dashboard/account/<%=request.getSession().getAttribute("userId")%>"><i class="fa fa-gear fa-fw"></i> 账户设置</a></li>
     <li class="<%=(curUser.equals("")?"hide":"")%>"><a href="${webPath}/dashboard/logout"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a></li>
 </ul>
 <ul id="dropdown2" class="dropdown-content w250">

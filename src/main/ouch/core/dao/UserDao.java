@@ -12,6 +12,11 @@ public interface UserDao {
     List<User> queryAll();
 
     /**
+     * 用户Id查询
+     */
+    User queryByUserId(String userId);
+
+    /**
      * 用户名查询
      */
     List<User> queryByUsername(String username);
@@ -24,11 +29,31 @@ public interface UserDao {
     /**
      * 添加用户
      */
-    void addUser(User user);
+    void add(User user);
 
     /**
      * 检查登录信息
      */
     User queryByLoginInfo(String username,String password);
+
+    /**
+     * 更改用户信息
+     */
+    void update(User user);
+
+    /**
+     * 更改用户信息(本人)
+     */
+    void edit(User user);
+
+    /**
+     * 更改用户密码
+     */
+    void updatePass(User user);
+
+    /**
+     * 删除用户
+     */
+    void delete(String userId);
 
 }

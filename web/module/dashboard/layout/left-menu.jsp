@@ -16,6 +16,12 @@
                 </a>
             </li>
 
+            <li>
+                <a class="waves-effect waves-dark" href="${webPath}/dashboard/bulletin/index" id="menu-bulletin">
+                    <i class="fa fa-bullhorn"></i>站内消息
+                </a>
+            </li>
+
         </ul>
 
     </div>
@@ -24,8 +30,11 @@
 <script>
     $(function () {
         var pathname = window.location.pathname;
-        if(pathname.indexOf("dashboard/user")!=-1) {
+        $('.waves-effect.waves-dark').removeClass('active-menu');
+        if (pathname.indexOf("dashboard/user")!=-1) {
             $("#menu-user").addClass("active-menu");
+        } else if(pathname.indexOf("dashboard/bulletin")!=-1){
+            $("#menu-bulletin").addClass("active-menu");
         } else {
             $("#menu-dashboard").addClass("active-menu");
         }

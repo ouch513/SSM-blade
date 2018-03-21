@@ -1,5 +1,5 @@
 $(function () {
-    $('#login-btn').bind('click', function () {
+    function login() {
         $('#login-warning').addClass('hide');
         var username = $('#login-username').val();
         var password = $('#login-password').val();
@@ -23,9 +23,12 @@ $(function () {
                 }
             },
             error: function () {
-                $('#login-warning').removeClass('hide');
-                $('#login-warning strong').text('服务器请求失败！');
+                login();
             }
         });
+    }
+
+    $('#login-btn').bind('click', function () {
+        login();
     })
 })

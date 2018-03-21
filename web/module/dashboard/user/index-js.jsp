@@ -26,7 +26,7 @@ $(function () {
                         alert(obj['info']);
                         window.location.href = webPath+'/dashboard/login';
                     }else{
-                        var errorInfo = "<tr><td colspan='5'>" + obj['info'] + "</td></tr>";
+                        var errorInfo = "<tr><td colspan='6'>" + obj['info'] + "</td></tr>";
                         $('#dataTables tbody').append(errorInfo);
                     }
 
@@ -35,8 +35,13 @@ $(function () {
 
                         var trData = "<tr>"
                             + "<td>" + obj['data'][i]['username'] +"</td>"
-                            + "<td>" + obj['data'][i]['email'] +"</td>"
-                            + "<td>" + obj['data'][i]['role'] +"</td>";
+                            + "<td>" + obj['data'][i]['email'] +"</td>";
+
+                        if(obj['data'][i]['role']==="会员用户"){
+                            trData += "<td><span class='text-danger'>" + obj['data'][i]['role'] +"</span></td>";
+                        }else{
+                            trData += "<td>" + obj['data'][i]['role'] +"</td>";
+                        }
 
                         if(obj['data'][i]['adminRole']==="管理员"){
                             trData += "<td><span class='label label-success'>" + obj['data'][i]['adminRole'] +"</span></td>";
@@ -44,10 +49,13 @@ $(function () {
                             trData += "<td><span class='label label-danger'>" + obj['data'][i]['adminRole'] +"</span></td>";
                         }else{
                             trData += "<td>" + obj['data'][i]['adminRole'] +"</td>";
-
                         }
 
-                        trData += "<td>" + obj['data'][i]['regTime'] +"</td></tr>";
+                        trData += "<td>" + obj['data'][i]['regTime'] +"</td>";
+
+                        trData += "<td><a href='"+webPath+'/dashboard/user/show/'+obj['data'][i]['userId']+"'><span class='label label-success' style='cursor:pointer'>查看</span></a></td>";
+
+                        trData +="</tr>";
 
                         $('#dataTables tbody').append(trData);
                     }
@@ -56,8 +64,7 @@ $(function () {
                 $('#dataTables').dataTable();
             },
             error:function (){ //失败回调函数
-                $('#dataTables tbody').html('');
-                $('#dataTables tbody').append("<tr><td colspan='5'>获取数据失败</td></tr>")
+                getUserListData();
             }
         });
     }

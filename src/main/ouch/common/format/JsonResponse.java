@@ -3,6 +3,7 @@ package main.ouch.common.format;
 import com.google.gson.Gson;
 import main.ouch.constant.Message;
 import main.ouch.constant.Role;
+import main.ouch.core.domain.Bulletin;
 import main.ouch.core.domain.User;
 
 import java.util.List;
@@ -20,15 +21,8 @@ public class JsonResponse {
         return "{\"status\":\"success\",\"data\":" + data + "}";
     }
 
-    public static String successSession(User user){
-        user = Role.getRoleType(user);
-        return "{\"status\":\"success\",\"data\":{\"userId\":\""
-                + user.getUserId() + "\",\"username\":\""
-                + user.getUsername() + "\",\"email\":\""
-                + user.getEmail() + "\",\"role\":\""
-                + user.getRole() + "\",\"adminRole\":\""
-                + user.getAdminRole() + "\",\"regTime\":\""
-                + user.getRegTime() +"\"}}";
+    public static String successInfo(String successInfo){
+        return "{\"status\":\"success\",\"info\":\"" + successInfo + "\"}";
     }
 
     public static String loginSession(User user, String token){
@@ -43,11 +37,21 @@ public class JsonResponse {
                 + token +"\"}}";
     }
 
+    public static String userInfo(User user){
+        user = Role.getRoleType(user);
+        return "{\"status\":\"success\",\"data\":{\"userId\":\""
+                + user.getUserId() + "\",\"username\":\""
+                + user.getUsername() + "\",\"email\":\""
+                + user.getEmail() + "\",\"role\":\""
+                + user.getRole() + "\",\"adminRole\":\""
+                + user.getAdminRole() + "\",\"regTime\":\""
+                + user.getRegTime() +"\"}}";
+    }
+
     public static String userList(List<User> list){
         list = Role.getRoleList(list);
 
         if(list.size()>0){
-
             String str = "{\"status\":\"success\",\"data\":[";
             for (int i=0; i<list.size(); i++) {
                 str += "{\"userId\":\""
@@ -57,6 +61,41 @@ public class JsonResponse {
                         + list.get(i).getRole() + "\",\"adminRole\":\""
                         + list.get(i).getAdminRole() + "\",\"regTime\":\""
                         + list.get(i).getRegTime() +"\"}";
+
+                if(i != list.size()-1){
+                    str += ",";
+                }
+            }
+            str += "]}";
+            return str;
+
+        }else {
+
+            return JsonResponse.error(Message.NO_DATA);
+        }
+    }
+
+    public static String bulletinInfo(Bulletin bulletin,String username){
+        return "{\"status\":\"success\",\"data\":{\"bulletinId\":\""
+                + bulletin.getBulletinId() + "\",\"title\":\""
+                + bulletin.getTitle() + "\",\"author\":\""
+                + username + "\",\"updatedAt\":\""
+                + bulletin.getUpdatedAt() + "\",\"content\":\""
+                + bulletin.getContent() +"\"}}";
+    }
+
+    public static String bulletinList(List<Bulletin> list){
+
+        if(list.size()>0){
+
+            String str = "{\"status\":\"success\",\"data\":[";
+            for (int i=0; i<list.size(); i++) {
+                str += "{\"bulletinId\":\""
+                        + list.get(i).getBulletinId() + "\",\"title\":\""
+                        + list.get(i).getTitle() + "\",\"userId\":\""
+                        + list.get(i).getUserId() + "\",\"updatedAt\":\""
+                        + list.get(i).getUpdatedAt() + "\",\"content\":\""
+                        + list.get(i).getContent() +"\"}";
 
                 if(i != list.size()-1){
                     str += ",";

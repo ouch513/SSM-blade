@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -57,8 +58,32 @@ public class DashboardController {
         session.removeAttribute("username");
         session.removeAttribute("userId");
         session.removeAttribute("token");
+        session.removeAttribute("adminRole");
 
         ModelAndView mv = new ModelAndView("redirect:/dashboard/login");
+        return mv;
+    }
+
+    @RequestMapping(value = "/profile/{userId}", method = RequestMethod.GET)
+    private ModelAndView profile(@PathVariable("userId") String userId) {
+        ModelAndView mv = new ModelAndView("dashboard/profile/index");
+        mv.addObject("userId",userId);
+
+        String username = (session.getAttribute("username")!=null)?session.getAttribute("username").toString():"";
+        if(ValueUtil.isEmpty(username)){
+            mv = new ModelAndView("redirect:/dashboard/login");
+        }
+        return mv;
+    }
+
+    @RequestMapping(value = "/account/{userId}", method = RequestMethod.GET)
+    private ModelAndView account(@PathVariable("userId") String userId) {
+        ModelAndView mv = new ModelAndView("dashboard/profile/account");
+
+        String username = (session.getAttribute("username")!=null)?session.getAttribute("username").toString():"";
+        if(ValueUtil.isEmpty(username)){
+            mv = new ModelAndView("redirect:/dashboard/login");
+        }
         return mv;
     }
 }

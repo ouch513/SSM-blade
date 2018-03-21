@@ -11,7 +11,7 @@
         values(#{userId},#{createdAt},#{token})
     </insert>
 
-    <select id="queryToken" parameterType="Token" resultType="Token">
+    <select id="queryToken" resultType="Token">
         SELECT
             user_id,
             created_at,

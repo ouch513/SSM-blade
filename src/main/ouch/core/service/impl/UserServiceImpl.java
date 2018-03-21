@@ -2,6 +2,7 @@ package main.ouch.core.service.impl;
 
 import main.ouch.common.format.JsonResponse;
 import main.ouch.common.tool.ValueUtil;
+import main.ouch.constant.Message;
 import main.ouch.constant.Role;
 import main.ouch.core.dao.UserDao;
 import main.ouch.core.domain.User;
@@ -30,6 +31,16 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public String queryById(String curId,String token,String userId) {
+        User user = userDao.queryByUserId(userId);
+        if(user==null){
+            return JsonResponse.error(Message.GET_DATA_ERROR);
+        }else{
+            return JsonResponse.userInfo(user);
+        }
+    }
+
+    @Override
     public List<User> queryByUsername(String username) {
         List<User> userList =  userDao.queryByUsername(username);
         return Role.getRoleList(userList);
@@ -55,13 +66,70 @@ public class UserServiceImpl implements UserService{
         SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
         user.setRegTime(dateFormat.format(date));
 
-        userDao.addUser(user);
+        userDao.add(user);
 
         return user;
     }
 
     @Override
+    public String create(String userId,String token,User user) {
+
+        String id = ValueUtil.uuid();
+        user.setUserId(id);
+        user.setPassword(ValueUtil.md5(user.getPassword()));
+
+        Date date = new Date();
+        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
+        user.setRegTime(dateFormat.format(date));
+
+        user = Role.checkData(user);
+        userDao.add(user);
+
+        return JsonResponse.userInfo(user);
+    }
+
+    @Override
     public User queryByLoginInfo(String username, String password) {
         return userDao.queryByLoginInfo(username,ValueUtil.md5(password));
+    }
+
+    @Override
+    public String update(String userId,String token,User user) {
+        userDao.update(user);
+        return JsonResponse.successInfo(Message.OPERATED_SUCCESS);
+    }
+
+    @Override
+    public String updatePass(String userId, String token, User user) {
+        user.setPassword(ValueUtil.md5(user.getPassword()));
+        userDao.updatePass(user);
+        return JsonResponse.successInfo(Message.OPERATED_SUCCESS);
+    }
+
+    @Override
+    public String edit(String userId, String token, User user) {
+        if(userId.equals(user.getUserId())){
+            userDao.edit(user);
+            return JsonResponse.successInfo(Message.OPERATED_SUCCESS);
+        }else{
+            return JsonResponse.error(Message.NOT_OWNER);
+        }
+    }
+
+    @Override
+    public String editPass(String userId, String token, User user) {
+        if(userId.equals(user.getUserId())){
+            user.setPassword(ValueUtil.md5(user.getPassword()));
+            userDao.updatePass(user);
+            return JsonResponse.successInfo(Message.OPERATED_SUCCESS);
+        }else{
+            return JsonResponse.error(Message.NOT_OWNER);
+        }
+    }
+
+    @Override
+    public String delete(String userId, String token, User user) {
+        userDao.delete(user.getUserId());
+        return JsonResponse.successInfo(Message.OPERATED_SUCCESS);
     }
 }

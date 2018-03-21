@@ -2,6 +2,7 @@ package main.ouch.constant;
 
 public class Message {
     public static final String NO_DATA = "未找到匹配数据";
+    public static final String GET_DATA_ERROR = "获取数据失败，请重试";
 
     public static final String NULL_PASSWORD = "密码不能为空";
     public static final String NOT_SAME_PASS = "两次密码输入不一致";
@@ -18,5 +19,12 @@ public class Message {
     public static final String ERROR_LOGIN = "用户名或密码错误";
 
     public static final String LOGIN_TIME_OUT = "登录超时";
+
+    public static final String NULL_TITLE = "标题不能为空";
+    public static final String TITLE_LIMIT = "标题不能超过50个字符";
+
+    public static final String OPERATED_SUCCESS = "操作成功";
+    public static final String NO_POWER = "权限不足";
+    public static final String NOT_OWNER = "仅限本人操作";
 
 }

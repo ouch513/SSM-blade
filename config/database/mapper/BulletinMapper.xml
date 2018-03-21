@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="main.ouch.core.dao.BulletinDao">
+
+    <select id="queryAll" parameterType="Bulletin" resultType="Bulletin">
+        SELECT
+            bulletin_id,
+            title,
+            user_id,
+            updated_at,
+            content
+        FROM
+            bulletin
+    </select>
+
+    <select id="queryById" parameterType="java.lang.String" resultType="Bulletin">
+        SELECT
+            bulletin_id,
+            title,
+            user_id,
+            updated_at,
+            content
+        FROM
+            bulletin
+        WHERE
+            bulletin_id = #{0}
+    </select>
+
+    <insert id="add" parameterType="Bulletin">
+        insert into bulletin(bulletin_id,title,user_id,updated_at,content)
+        values(#{bulletinId},#{title},#{userId},#{updatedAt},#{content})
+    </insert>
+
+    <update id="update" parameterType="Bulletin">
+        UPDATE
+            bulletin
+        SET
+            title = #{title},
+            updated_at = #{updatedAt},
+            content = #{content}
+        WHERE
+            bulletin_id = #{bulletinId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        DELETE FROM
+            bulletin
+        WHERE
+            bulletin_id = #{0}
+    </delete>
+
+</mapper>

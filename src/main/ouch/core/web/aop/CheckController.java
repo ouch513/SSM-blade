@@ -24,7 +24,12 @@ public class CheckController {
     HttpSession session;
 
     //登录检测
-    @Pointcut("execution(* main.ouch.core.service.impl.*.getList(..))")
+    @Pointcut("execution(* main.ouch.core.service.impl.*.getList(..))||" +
+            "execution(* main.ouch.core.service.impl.*.create(..))||" +
+            "execution(* main.ouch.core.service.impl.*.update*(..))||" +
+            "execution(* main.ouch.core.service.impl.*.delete(..))||" +
+            "execution(* main.ouch.core.service.impl.*.edit*(..))||" +
+            "execution(* main.ouch.core.service.impl.*.queryById(..))")
     public void pointCut() {
 
     }

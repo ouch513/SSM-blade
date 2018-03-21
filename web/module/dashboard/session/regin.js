@@ -1,5 +1,9 @@
 $(function () {
     $('#regin-btn').bind('click', function () {
+        regin();
+    });
+
+    function regin() {
         $('#regin-warning').addClass('hide');
         var username = $('#regin-username').val();
         var email = $('#regin-email').val();
@@ -9,7 +13,7 @@ $(function () {
         var webPath = window.location.protocol + "//" + window.location.host;
 
         $.ajax({
-            url: webPath + '/api/user/add',
+            url: webPath + '/api/user/regist',
             type: 'POST',
             data: {
                 'username': username,
@@ -28,9 +32,8 @@ $(function () {
                 }
             },
             error: function () {
-                $('#regin-warning').removeClass('hide');
-                $('#regin-warning strong').text('服务器请求失败！');
+                regin();
             }
         });
-    })
+    }
 })
