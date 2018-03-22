@@ -26,20 +26,20 @@
 
                 <!-- Advanced Tables -->
                 <div class="card">
-                    <div class="card-action" style="font-size:18px;color: #F0433D;">
+                    <div class="card-action" style="font-size:18px;color: #F0433D;padding-bottom: 0;margin-bottom: 0;">
                         查看公告<br>
+
                         <div class="input-field col s12 hide" id="delete-warning">
                             <div class="alert alert-danger" role="alert"><strong>Warning!</strong></div>
-                        </div><br>
+                        </div>
                     </div>
                     <div class="card-content">
                         <div class="row" style="padding: 0 20px;" id="edit-form">
 
                             <div class="input-field col s12">
-                                <strong id="show-title"></strong><br>
-                                <div id="show-content">
-
-                                </div>
+                                <h2 id="show-title" class="text-center"></h2>
+                                <h5 id="show-info" class="text-right"></h5>
+                                <div id="show-content"></div>
                             </div>
 
                             <div class="input-field col s12 text-right" style="margin-top: 30px;">

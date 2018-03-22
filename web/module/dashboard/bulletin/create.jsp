@@ -27,7 +27,7 @@
                 <!-- Advanced Tables -->
                 <div class="card">
                     <div class="card-action">
-                        发布公告<br>
+                        <strong style="font-size:18px;color: #F0433D;">发布公告</strong><br>
                         <div class="input-field col s12 hide" id="create-warning">
                             <div class="alert alert-danger" role="alert"><strong>Warning!</strong></div>
                         </div>
@@ -42,7 +42,8 @@
 
                             <div class="input-field col s12">
                                 <strong>内容：</strong>
-                                <input id="create-content" type="text" class="validate">
+                                <script id="create-content" type="text/plain"></script>
+                                <%--<input id="create-content" type="text" class="validate">--%>
                             </div>
 
                             <div class="input-field col s12 text-right">
@@ -50,8 +51,6 @@
                             </div>
 
                         </div>
-
-                        <%@ include file="create-js.jsp" %>
                     </div>
                 </div>
 
@@ -59,4 +58,10 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" charset="utf-8" src="${staticResourcePath}/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${staticResourcePath}/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="${staticResourcePath}/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+<%@ include file="create-js.jsp" %>
 

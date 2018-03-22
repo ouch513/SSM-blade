@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class TokenTool {
+public class TokenUtil {
 
     public static String createToken(String userId) {
 

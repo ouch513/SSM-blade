@@ -48,6 +48,7 @@ public class CheckController {
         try {
             // 获得切入的方法
 //            Method method = ((MethodSignature) proceedingJoinPoint.getSignature()).getMethod();
+//            System.out.println(method);
 //            // 获得所有参数
 //            Parameter[] parameters = method.getParameters();
 //

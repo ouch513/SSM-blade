@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <head>
     <title>控制中心-Dashboard</title>
+    <meta name="author" content="郑好 Email:zheng18877323173@163.com, QQ:1431070290">
 
     <%@ include file="../../common/url-config.jsp" %>
 

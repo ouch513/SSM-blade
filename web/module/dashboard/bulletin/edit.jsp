@@ -26,8 +26,8 @@
 
                 <!-- Advanced Tables -->
                 <div class="card">
-                    <div class="card-action">
-                        编辑公告<br>
+                    <div class="card-action" >
+                        <strong style="font-size:18px;color: #F0433D;">编辑公告</strong><br>
                         <div class="input-field col s12 hide" id="edit-warning">
                             <div class="alert alert-danger" role="alert"><strong>Warning!</strong></div>
                         </div>
@@ -45,7 +45,7 @@
 
                             <div class="input-field col s12">
                                 <strong>内容：</strong>
-                                <input id="edit-content" type="email">
+                                <script id="edit-content" type="text/plain"></script>
                             </div>
 
                             <div class="input-field col s12 text-right">
@@ -53,8 +53,6 @@
                             </div>
 
                         </div>
-
-                        <%@ include file="edit-js.jsp" %>
                     </div>
                 </div>
 
@@ -62,3 +60,9 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" charset="utf-8" src="${staticResourcePath}/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${staticResourcePath}/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="${staticResourcePath}/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+<%@ include file="edit-js.jsp" %>

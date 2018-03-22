@@ -37,7 +37,8 @@ $(function () {
 
                 } else {
                     $('#show-title').html(obj['data']['title']);
-                    $('#show-content').html(obj['data']['content']);
+                    $('#show-info').html("—— by: "+obj['data']['author'] + "<small> [ " + obj['data']['updatedAt'] + " ]</small>");
+                    $('#show-content').html(htmlDecodeByRegExp(obj['data']['content']));
                 }
             },
             error:function (){ //失败回调函数
@@ -78,6 +79,18 @@ $(function () {
                 deleteBulletin();
             }
         });
+    }
+
+    function htmlDecodeByRegExp(str) {
+        var s = "";
+        if (str.length == 0) return "";
+        s = str.replace(/&amp;/g, "&");
+        s = s.replace(/&lt;/g, "<");
+        s = s.replace(/&gt;/g, ">");
+        s = s.replace(/&nbsp;/g, " ");
+        s = s.replace(/&#39;/g, "\'");
+        s = s.replace(/&quot;/g, "\"");
+        return s;
     }
 });
 </script>

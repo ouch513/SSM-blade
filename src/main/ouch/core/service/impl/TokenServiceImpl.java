@@ -1,7 +1,6 @@
 package main.ouch.core.service.impl;
 
-import main.ouch.common.tool.TokenTool;
-import main.ouch.common.tool.ValueUtil;
+import main.ouch.common.tool.TokenUtil;
 import main.ouch.core.dao.TokenDao;
 import main.ouch.core.domain.Token;
 import main.ouch.core.service.TokenService;
@@ -24,8 +23,8 @@ public class TokenServiceImpl implements TokenService {
     @Override
     public String addToken(String userId) {
         token.setUserId(userId);
-        token.setCreatedAt(TokenTool.nowDate());
-        token.setToken(TokenTool.createToken(userId));
+        token.setCreatedAt(TokenUtil.nowDate());
+        token.setToken(TokenUtil.createToken(userId));
         tokenDao.addToken(token);
 
         return token.getToken();
@@ -39,7 +38,7 @@ public class TokenServiceImpl implements TokenService {
         if(tokenInfo==null){
             return false;
         }else{
-            return TokenTool.checkTime(tokenInfo.getCreatedAt());
+            return TokenUtil.checkTime(tokenInfo.getCreatedAt());
         }
     }
 
