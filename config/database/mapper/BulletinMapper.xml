@@ -15,6 +15,8 @@
             content
         FROM
             bulletin
+        ORDER BY
+            updated_at DESC
     </select>
 
     <select id="queryById" parameterType="java.lang.String" resultType="Bulletin">

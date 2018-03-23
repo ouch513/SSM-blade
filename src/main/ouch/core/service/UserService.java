@@ -12,6 +12,11 @@ public interface UserService {
     String getList(String userId,String token);
 
     /**
+     * 查看自己信息
+     */
+    String getInfo(String userId,String token);
+
+    /**
      * 用户ID查询
      */
     String queryById(String curId,String token,String userId);
@@ -50,6 +55,11 @@ public interface UserService {
      * 更改用户密码
      */
     String updatePass(String userId,String token,User user);
+
+    /**
+     * 更改用户权限
+     */
+    String toggleAdmin(String curId,String token,String userId);
 
     /**
      * 更改用户信息(限本人操作)

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2018-03-22 14:17:42
+-- Generation Time: 2018-03-23 16:54:51
 -- 服务器版本： 5.7.19-0ubuntu0.16.04.1
 -- PHP Version: 7.0.4-7ubuntu2
 
@@ -44,6 +44,50 @@ INSERT INTO `bulletin` (`bulletin_id`, `title`, `user_id`, `updated_at`, `conten
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `permission`
+--
+
+CREATE TABLE `permission` (
+  `permission_id` int(11) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `slug` varchar(100) NOT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `permission`
+--
+
+INSERT INTO `permission` (`permission_id`, `name`, `slug`, `type`) VALUES
+(1, '发布公告', 'BulletinServiceImpl.create', 0),
+(2, '编辑公告', 'BulletinServiceImpl.update', 0),
+(3, '删除公告', 'BulletinServiceImpl.delete', 0),
+(4, 'ID查找用户', 'UserServiceImpl.queryById', 0),
+(5, '用户列表', 'UserServiceImpl.getList', 0),
+(6, '创建用户', 'UserServiceImpl.create', 0),
+(7, '修改用户信息', 'UserServiceImpl.update', 0),
+(8, '修改用户密码', 'UserServiceImpl.updatePass', 0),
+(9, '删除用户', 'UserServiceImpl.delete', 0),
+(10, '权限列表', 'PermissionServiceImpl.getList', 0),
+(11, 'ID查找权限', 'PermissionServiceImpl.queryById', 0),
+(12, '公共权限列表', 'PermissionServiceImpl.queryPublicPermission', 0),
+(13, '管理权限列表', 'PermissionServiceImpl.queryAdminPermission', 0),
+(14, '创建权限', 'PermissionServiceImpl.create', 0),
+(15, '修改权限', 'PermissionServiceImpl.update', 0),
+(16, '删除权限', 'PermissionServiceImpl.delete', 0),
+(17, '用户权限列表', 'PermissionServiceImpl.queryUserPermission', 0),
+(18, '用户权限赋予', 'PermissionServiceImpl.createUserPermission', 0),
+(19, '用户权限剥夺', 'PermissionServiceImpl.deleteUserPermission', 0),
+(20, 'ID查找公告', 'BulletinServiceImpl.queryById', 1),
+(21, '公告列表', 'BulletinServiceImpl.getList', 1),
+(22, '账户信息', 'UserServiceImpl.getInfo', 1),
+(23, '修改账户信息', 'UserServiceImpl.edit', 1),
+(24, '修改账户密码', 'UserServiceImpl.editPass', 1),
+(25, '账户权限列表', 'PermissionServiceImpl.querySelfPermission', 1);
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `token`
 --
 
@@ -76,6 +120,36 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`user_id`, `username`, `email`, `password`, `role`, `admin_role`, `reg_time`) VALUES
 ('475F46E9782A48D29E356D0FF6D91559', 'ouch', 'ouch@123.com', '7c43122618e6ce52a9e3399eff4f9899', 1, 2, '2018-03-21');
 
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `user_permission`
+--
+
+CREATE TABLE `user_permission` (
+  `user_id` varchar(35) NOT NULL,
+  `permission_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `permission`
+--
+ALTER TABLE `permission`
+  ADD PRIMARY KEY (`permission_id`);
+
+--
+-- 在导出的表使用AUTO_INCREMENT
+--
+
+--
+-- 使用表AUTO_INCREMENT `permission`
+--
+ALTER TABLE `permission`
+  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

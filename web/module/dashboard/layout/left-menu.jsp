@@ -17,6 +17,12 @@
             </li>
 
             <li>
+                <a class="waves-effect waves-dark" href="${webPath}/dashboard/permission/index" id="menu-permission">
+                    <i class="fa fa-shield "></i>权限管理
+                </a>
+            </li>
+
+            <li>
                 <a class="waves-effect waves-dark" href="${webPath}/dashboard/bulletin/index" id="menu-bulletin">
                     <i class="fa fa-bullhorn"></i>站内消息
                 </a>
@@ -33,6 +39,8 @@
         $('.waves-effect.waves-dark').removeClass('active-menu');
         if (pathname.indexOf("dashboard/user")!=-1) {
             $("#menu-user").addClass("active-menu");
+        } else if(pathname.indexOf("dashboard/permission")!=-1) {
+            $("#menu-permission").addClass("active-menu");
         } else if(pathname.indexOf("dashboard/bulletin")!=-1){
             $("#menu-bulletin").addClass("active-menu");
         } else {

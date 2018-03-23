@@ -16,6 +16,7 @@
             reg_time
         FROM
             user
+        ORDER BY admin_role DESC ,reg_time DESC
     </select>
 
     <select id="queryByUserId" parameterType="java.lang.String" resultType="User">
@@ -115,5 +116,14 @@
         WHERE
             user_id = #{0}
     </delete>
+
+    <update id="updateAdmin" parameterType="java.lang.String">
+        UPDATE
+            user
+        SET
+            admin_role = #{1}
+        WHERE
+            user_id = #{0}
+    </update>
 
 </mapper>

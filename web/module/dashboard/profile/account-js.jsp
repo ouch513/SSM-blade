@@ -20,10 +20,11 @@ $(function () {
         $('#account-edit-warning').addClass('hide');
         var webPath = window.location.protocol + "//" + window.location.host;
         $.ajax({
-            url: webPath+'/api/user/queryByUserId',
+            url: webPath+'/api/user/getSelfInfo',
             type:'POST',
             data: {
-                'userId': "<%=request.getSession().getAttribute("userId")%>"
+                'userId': "<%=request.getSession().getAttribute("userId")%>",
+                'token': "<%=request.getSession().getAttribute("token")%>"
             },
             dataType: 'json',
             success:function(obj){ //成功回调函数

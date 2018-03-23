@@ -31,6 +31,16 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public String getInfo(String userId,String token) {
+        User user = userDao.queryByUserId(userId);
+        if(user==null){
+            return JsonResponse.error(Message.GET_DATA_ERROR);
+        }else{
+            return JsonResponse.userInfo(user);
+        }
+    }
+
+    @Override
     public String queryById(String curId,String token,String userId) {
         User user = userDao.queryByUserId(userId);
         if(user==null){
@@ -103,6 +113,19 @@ public class UserServiceImpl implements UserService{
     public String updatePass(String userId, String token, User user) {
         user.setPassword(ValueUtil.md5(user.getPassword()));
         userDao.updatePass(user);
+        return JsonResponse.successInfo(Message.OPERATED_SUCCESS);
+    }
+
+    @Override
+    public String toggleAdmin(String curId, String token, String userId) {
+        User user = userDao.queryByUserId(userId);
+        if(user.getAdminRole().equals("2")){
+            return JsonResponse.successInfo(Message.NOT_OWNER);
+        }else if(user.getAdminRole().equals("1")){
+            userDao.updateAdmin(userId,"0");
+        }else {
+            userDao.updateAdmin(userId,"1");
+        }
         return JsonResponse.successInfo(Message.OPERATED_SUCCESS);
     }
 

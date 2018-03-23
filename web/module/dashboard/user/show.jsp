@@ -67,10 +67,6 @@
                     </div>
                 </div>
 
-            </div>
-
-            <div class="col-sm-12 col-md-6">
-
                 <!-- Advanced Tables -->
                 <div class="card">
                     <div class="card-action" style="font-size:18px;color: #F0433D;">
@@ -99,6 +95,10 @@
                     </div>
                 </div>
 
+            </div>
+
+            <div class="col-sm-12 col-md-6">
+
                 <div class="card">
                     <div class="card-action" style="font-size:18px;color: #F0433D;">
                         其他操作<br>
@@ -110,15 +110,29 @@
                         </div>
                     </div>
                     <div class="card-content">
-
                         <button class="btn btn-danger" id="delete-user">删除用户</button>
-
+                        <button class="btn btn-success hide" id="toggle-admin"></button>
                     </div>
                 </div>
 
-                <%@ include file="show-js.jsp" %>
+                <div class="card hide" id="permission-box">
+                    <div class="card-action" style="font-size:18px;color: #F0433D;">
+                        管理权限<br>
+                        <div class="input-field col s12 hide" id="admin-warning">
+                            <div class="alert alert-danger" role="alert"><strong>Warning!</strong></div>
+                        </div><br>
+                        <div class="input-field col s12 hide" id="admin-success">
+                            <div class="alert alert-success" role="alert"><strong>success!</strong></div>
+                        </div>
+                    </div>
+                    <div class="card-content" id="permission-card">
+                        <div class="row" id="permission-switch"></div>
+                    </div>
+                </div>
 
             </div>
+
+            <%@ include file="show-js.jsp" %>
         </div>
     </div>
 </div>

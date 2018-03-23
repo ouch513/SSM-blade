@@ -53,6 +53,10 @@ public class BulletinApiController {
         String userId = req.getParameter("userId");
         String token = req.getParameter("token");
 
+        if(ValueUtil.isEmpty(bulletinId)){
+            return JsonResponse.error(Message.NULL_ID);
+        }
+
         return bulletinService.queryById(userId, token, bulletinId);
     }
 
@@ -99,6 +103,10 @@ public class BulletinApiController {
             return JsonResponse.error(Message.NULL_TITLE);
         }
 
+        if(ValueUtil.isEmpty(bulletinId)){
+            return JsonResponse.error(Message.NULL_ID);
+        }
+
         if(ValueUtil.isMoreThan(50,title)){
             return JsonResponse.error(Message.TITLE_LIMIT);
         }
@@ -119,6 +127,10 @@ public class BulletinApiController {
         String userId = req.getParameter("userId");
         String bulletinId = req.getParameter("bulletinId");
         String token = req.getParameter("token");
+
+        if(ValueUtil.isEmpty(bulletinId)){
+            return JsonResponse.error(Message.NULL_ID);
+        }
 
         return bulletinService.delete(userId,token,bulletinId);
     }

@@ -42,6 +42,11 @@ public interface UserDao {
     void update(User user);
 
     /**
+     * 更改用户权限
+     */
+    void updateAdmin(String userId, String adminRole);
+
+    /**
      * 更改用户信息(本人)
      */
     void edit(User user);

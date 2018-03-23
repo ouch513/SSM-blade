@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="main.ouch.core.dao.PermissionDao">
+
+    <select id="queryAll" resultType="Permission">
+        SELECT
+            permission_id,
+            name,
+            slug,
+            type
+        FROM
+            permission
+        ORDER BY slug
+    </select>
+
+    <select id="queryById" parameterType="java.lang.String" resultType="Permission">
+        SELECT
+            permission_id,
+            name,
+            slug,
+            type
+        FROM
+            permission
+        where
+            permission_id = #{0}
+        ORDER BY slug
+    </select>
+
+    <select id="queryPublicPermission" resultType="Permission">
+        SELECT
+            permission_id,
+            name,
+            slug,
+            type
+        FROM
+            permission
+        WHERE 
+            type = 1
+        ORDER BY slug
+    </select>
+
+    <select id="queryAdminPermission" resultType="Permission">
+        SELECT
+            permission_id,
+            name,
+            slug,
+            type
+        FROM
+            permission
+        WHERE 
+            type = 0
+        ORDER BY slug
+    </select>
+
+    <insert id="add" parameterType="Permission">
+        insert into permission(name,slug,type)
+        values(#{name},#{slug},#{type})
+    </insert>
+
+    <update id="update" parameterType="Permission">
+        UPDATE
+            permission
+        SET
+            name = #{name},
+            slug = #{slug},
+            type = #{type}
+        WHERE
+            permission_id = #{permissionId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        DELETE FROM
+            permission
+        WHERE
+            permission_id = #{0}
+    </delete>
+
+    <select id="queryUserPermission" parameterType="java.lang.String" resultType="Permission">
+        SELECT
+            permission.permission_id AS permission_id,
+            permission.name AS name,
+            permission.slug AS slug,
+            permission.type AS type
+        FROM
+            permission  INNER JOIN user_permission
+            ON
+            permission.permission_id = user_permission.permission_id
+            and permission.type = 0
+        WHERE
+            user_permission.user_id =  #{0}
+        ORDER BY slug
+    </select>
+
+    <delete id="deleteUserPermission" parameterType="Permission">
+        DELETE FROM user_permission
+        WHERE user_id = #{0} AND permission_id = #{1}
+    </delete>
+
+    <insert id="addUserPermission" parameterType="Permission">
+        insert into user_permission (user_id,permission_id)
+        values(#{0},#{1})
+    </insert>
+
+</mapper>

@@ -47,6 +47,16 @@ public class UserApiController {
         return userService.getList(userId,token);
     }
 
+    @RequestMapping(value = "/getSelfInfo",produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    private String selfInfo(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
+        req.setCharacterEncoding("utf-8");//设置参数的编码格式
+        String userId = req.getParameter("userId");
+        String token = req.getParameter("token");
+
+        return userService.getInfo(userId,token);
+    }
+
     @RequestMapping(value = "/queryById",produces = "text/plain;charset=utf-8")
     @ResponseBody
     private String queryById(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
@@ -55,6 +65,9 @@ public class UserApiController {
         String curId = req.getParameter("curId");
         String token = req.getParameter("token");
 
+        if(ValueUtil.isEmpty(userId)){
+            return JsonResponse.error(Message.NULL_ID);
+        }
 
         return userService.queryById(curId,token,userId);
     }
@@ -163,6 +176,10 @@ public class UserApiController {
             return JsonResponse.error(Message.NULL_EMAIL);
         }
 
+        if(ValueUtil.isEmpty(userId)){
+            return JsonResponse.error(Message.NULL_ID);
+        }
+
         if(ValueUtil.checkEmail(email)){
             return JsonResponse.error(Message.ERROR_EMAIL);
         }
@@ -198,6 +215,10 @@ public class UserApiController {
             return JsonResponse.error(Message.NULL_PASSWORD);
         }
 
+        if(ValueUtil.isEmpty(userId)){
+            return JsonResponse.error(Message.NULL_ID);
+        }
+
         if(ValueUtil.checkLength(6,22, password)){
             return JsonResponse.error(Message.PASSWORD_LIMIT);
         }
@@ -209,6 +230,21 @@ public class UserApiController {
         user.setPassword(password);
 
         return userService.updatePass(curId,token,user);
+    }
+
+    @RequestMapping(value = "/toggleAdmin",produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    private String toggleAdmin(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
+        req.setCharacterEncoding("utf-8");//设置参数的编码格式
+        String userId = req.getParameter("userId");
+        String curId = req.getParameter("curId");
+        String token = req.getParameter("token");
+
+        if(ValueUtil.isEmpty(userId)){
+            return JsonResponse.error(Message.NULL_ID);
+        }
+
+        return userService.toggleAdmin(curId,token,userId);
     }
 
     @RequestMapping(value = "/edit",produces = "text/plain;charset=utf-8")
@@ -223,6 +259,10 @@ public class UserApiController {
 
         if(ValueUtil.isEmpty(email)){
             return JsonResponse.error(Message.NULL_EMAIL);
+        }
+
+        if(ValueUtil.isEmpty(userId)){
+            return JsonResponse.error(Message.NULL_ID);
         }
 
         if(ValueUtil.checkEmail(email)){
@@ -257,6 +297,10 @@ public class UserApiController {
             return JsonResponse.error(Message.NULL_PASSWORD);
         }
 
+        if(ValueUtil.isEmpty(userId)){
+            return JsonResponse.error(Message.NULL_ID);
+        }
+
         if(ValueUtil.checkLength(6,22, password)){
             return JsonResponse.error(Message.PASSWORD_LIMIT);
         }
@@ -276,6 +320,10 @@ public class UserApiController {
         String userId = req.getParameter("userId");
         String curId = req.getParameter("curId");
         String token = req.getParameter("token");
+
+        if(ValueUtil.isEmpty(userId)){
+            return JsonResponse.error(Message.NULL_ID);
+        }
 
         user.setUserId(userId);
 

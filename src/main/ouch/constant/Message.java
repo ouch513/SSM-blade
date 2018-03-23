@@ -21,10 +21,14 @@ public class Message {
     public static final String LOGIN_TIME_OUT = "登录超时";
 
     public static final String NULL_TITLE = "标题不能为空";
+    public static final String NULL_ID = "ID不能为空";
     public static final String TITLE_LIMIT = "标题不能超过50个字符";
 
     public static final String OPERATED_SUCCESS = "操作成功";
     public static final String NO_POWER = "权限不足";
     public static final String NOT_OWNER = "仅限本人操作";
+    public static final String NO_POWER_GIVEN = "该用户未被赋予任何权限";
+
+    public static final String NULL_STR = "不能提交空字段";
 
 }

@@ -2,8 +2,10 @@ package main.ouch.common.format;
 
 import com.google.gson.Gson;
 import main.ouch.constant.Message;
+import main.ouch.constant.PermissionType;
 import main.ouch.constant.Role;
 import main.ouch.core.domain.Bulletin;
+import main.ouch.core.domain.Permission;
 import main.ouch.core.domain.User;
 
 import java.util.List;
@@ -96,7 +98,6 @@ public class JsonResponse {
                         + list.get(i).getUserId() + "\",\"updatedAt\":\""
                         + list.get(i).getUpdatedAt() + "\",\"content\":\""
                         + list.get(i).getContent() +"\"}";
-
                 if(i != list.size()-1){
                     str += ",";
                 }
@@ -107,6 +108,41 @@ public class JsonResponse {
         }else {
 
             return JsonResponse.error(Message.NO_DATA);
+        }
+    }
+
+    public static String permissionInfo(Permission permission){
+        permission = PermissionType.getPermissionType(permission);
+        return "{\"status\":\"success\",\"data\":{\"permissionId\":\""
+                + permission.getPermissionId() + "\",\"name\":\""
+                + permission.getName() + "\",\"slug\":\""
+                + permission.getSlug() + "\",\"type\":\""
+                + permission.getType() +"\"}}";
+    }
+
+    public static String permissionList(List<Permission> list){
+        list = PermissionType.getTypeList(list);
+
+        if(list.size()>0){
+
+            String str = "{\"status\":\"success\",\"data\":[";
+            for (int i=0; i<list.size(); i++) {
+                str += "{\"permissionId\":\""
+                        + list.get(i).getPermissionId() + "\",\"name\":\""
+                        + list.get(i).getName() + "\",\"slug\":\""
+                        + list.get(i).getSlug() + "\",\"type\":\""
+                        + list.get(i).getType() +"\"}";
+
+                if(i != list.size()-1){
+                    str += ",";
+                }
+            }
+            str += "]}";
+            return str;
+
+        }else {
+
+            return JsonResponse.error(Message.NO_POWER_GIVEN);
         }
     }
 }
